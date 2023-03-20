@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+   <%- include('partial/header', {userId : userId}) %>
+
+    <% if (typeof errors !== 'undefined') { %>
+          <% errors.forEach(function (error){ %> 
+            <article class="message is-warning is-block mx-6 is-round">
+              <div class="message-header">
+                <%= error.msg %>
+              </div>
+            </article>
+         <% }); %> 
+    <% } %>
+
+        <div class="section">
+          <div class="container">
+            <form id="register-form box" method="post">
+              <div class="field">
+                <label class="label" for="username">Username</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Username" name="username"/>
+                </div>
+                <div class="columns row-one">
+                  <div class="column">
+                    <label class="label" for="firstName">Name</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Name" name="name"/>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <label class="label" for="lastName">Year of birth</label>
+                    <div class="control">
+                      <input class="input" type="date" name="yob"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <label class="label" for="password">Password</label>
+                    <div class="control">
+                      <input class="input" type="password" placeholder="Password" name="password"/>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <label class="label" for="retypePassword">Re-Type Password</label>
+                    <div class="control">
+                      <input class="input" type="password" placeholder="Confirm Password" name="retypePassword"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button is-primary is-medium" type="submit">Register</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+    
+</body>
+</html>

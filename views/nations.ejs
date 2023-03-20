@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title><%= title %></title>
+</head>
+<body>
+
+    <%- include('partial/header', {userId : userId}) %>
+
+    <div class="columns is-multiline is-mobile is-centered mt-5">
+        <% nations.forEach(nation=> { %>
+            <div class="column is-2-desktop is-one-fifth-tablet is-12-mobile mx-2" style="flex: 0 0 18%;">
+                <div class="card is-narrow">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="<%=nation.image %>" alt="">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="is-6"> <span class="title is-6"> Name : </span>
+                                    <%= nation.name %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p> <span class="title is-6">Description  : </span>
+                                <%= nation.description %>
+                            </p>
+                        </div>
+                    </div>
+                    <% if(userId){ %>
+                        <% if(userId.isAdmin){ %>
+                            <footer class="card-footer">
+                                <a class="card-footer-item button is-warning is-light" href=<%="/nations/edit/" + nation._id %>>Edit</a>
+                                <a class="card-footer-item button is-danger is-light" onclick="return confirm('Are you sure you want to delete this item?')" href=<%="/nations/delete/" + nation._id %>>Delete</a>
+                            </footer>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+
+    <% if(userId){ %>
+        <% if(userId.isAdmin){ %>
+            <button class="button is-primary m-5 is-pulled-right" id="modal-button">Add new nation</button>
+        <% } %>
+    <% } %>
+
+    <div class="modal" id="modal">
+        <div class="modal-background"></div>
+        <form class="box" method="post">
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Add Nation</p>
+                    <div class="delete modal-cancel-button" aria-label="close"></div>
+                </header>
+                <section class="modal-card-body">
+                    <form>
+                        <div class="field">
+                            <label class="label">Name</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Name" name="name" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Image</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Image URL" name="image" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Decription</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Name" name="description">
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Save</button>
+                    <div class="button modal-cancel-button">Cancel</div>
+                </footer>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        const modalButton = document.getElementById('modal-button');
+        const modal = document.getElementById('modal');
+        const modalCancelButton = document.querySelectorAll('.modal-cancel-button')
+
+        console.log(modalCancelButton);
+
+        modalButton.addEventListener('click', () => {
+            modal.classList.add('is-active');
+        });
+
+        modalCancelButton.forEach(item => {
+            item.addEventListener('click', () => {
+                modal.classList.remove('is-active');
+            });
+        })
+
+    </script>
+
+</body>
+</html>

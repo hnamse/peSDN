@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('partial/header', {userId : userId}) %>
+
+    
+        <div class="box">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">User name : </label>
+                </div>
+                <div class="field-body is-normal">
+                    <p>
+                        <%= user.username %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Name : </label>
+                </div>
+                <div class="field-body is-normal">
+                    <p>
+                        <%= user.name %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Date of birth : </label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <p>
+                                <%= user.yob %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary is-pulled-right mx-5" data-target="modal">Edit profile</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control" style="width: 200px;">
+                            <a class="button is-primary is-pulled-right mx-5" href="/users/changePassword">Change password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal -->
+
+        <div class="modal" id="modal">
+            <div class="modal-background"></div>
+            <form method="post">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Cập nhật thông tin</p>
+                        <button class="delete closeModel" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
+                            <label class="label">Họ và tên</label>
+                            <div class="control">
+                                <input class="input" name="name" type="text" placeholder="Nhập họ và tên của bạn" value="<%= user.name %>">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Ngày sinh</label>
+                            <div class="control">
+                                <input class="input" type="date" name="yob" value="<%= user.yob %>">
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button class="button is-success">Lưu</button>
+                        <button class="button closeModel">Hủy</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            const modal = document.querySelector('#modal');
+            const modalButton = document.querySelector('[data-target="modal"]');
+            const modalClose = modal.querySelectorAll('.closeModel');
+
+            modalButton.addEventListener('click', () => {
+                modal.classList.add('is-active');
+            });
+
+            modalClose.forEach((item) => {
+                item.addEventListener('click', () => {
+                    modal.classList.remove('is-active');
+                });
+            }) 
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <%- include('partial/header', {userId : userId}) %>
+
+    <% if(success_msg != ''){ %>
+      <article class="message is-warning is-block mx-6 is-round">
+        <div class="message-header">
+          <%= success_msg %>
+        </div>
+      </article>
+    <% } %>
+    <% if(error_msg != ''){ %>
+      <article class="message is-warning is-block mx-6 is-round">
+        <div class="message-header">
+          <%= error_msg %>
+        </div>
+      </article>
+    <% } %>   
+    <% if(error != ''){ %>
+      <article class="message is-warning is-block mx-6 is-round">
+        <div class="message-header">
+          <%= error %>
+        </div>
+      </article>
+    <% } %>
+
+    <!-- form login -->
+
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                <form class="box" method="post">
+                  <div class="field">
+                    <label for="" class="label">User</label>
+                    <div class="control">
+                      <input type="text" placeholder="User" name="username" class="input">
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="" class="label">Password</label>
+                    <div class="control">
+                      <input type="password" placeholder="*******" name="password" class="input">
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <button class="button is-success">
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</body>
+</html>

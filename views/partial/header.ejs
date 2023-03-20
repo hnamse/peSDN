@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar box" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/players">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Easports_fifa_logo.svg/2560px-Easports_fifa_logo.svg.png" width="112">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/players">
+                    Players
+                </a>
+
+                <a class="navbar-item" href="/nations">
+                    Nations
+                </a>
+
+            </div>
+            
+            <% if(userId){ %>
+
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <% if(userId.isAdmin){ %>
+                        <a class="button is-light   " href="/users/dashboard">
+                            Dashboard
+                        </a>
+                        <% } %>
+                        <a class="button is-light" href=<%="/users/edit/" + userId._id %>>
+                            View profile
+                        </a>
+                        <a class="button is-danger" href="/users/logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="navbar-end mx-0 my-0">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-primary" href="/users/register">
+                                    <strong>Register</strong>
+                                </a>
+                                <a class="button is-light" href="/users/login">
+                                    Log in
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+            <!-- <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="/users/register">
+                            <strong>Register</strong>
+                        </a>
+                        <a class="button is-light" href="/users/login">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </nav>
+</body>
+
+</html>
